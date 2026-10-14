@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Said Screenshot Pro - Studio Editor</title>
+  <link rel="stylesheet" href="editor.css">
+  <link rel="icon" type="image/png" href="icons/icon32.png">
+</head>
+<body class="theme-dark">
+  <div id="app" class="studio-container">
+    <header class="studio-header">
+      <div class="header-left">
+        <div class="brand">
+          <img src="icons/icon32.png" alt="Logo" class="brand-icon">
+          <div class="brand-text">
+            <span class="brand-title">SAID SCREENSHOT PRO</span>
+            <span class="brand-badge">STUDIO</span>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="filename-container">
+          <input type="text" id="filename-input" value="SaidScreenshot_Capture" title="Click to rename file">
+          <span class="filename-ext" id="filename-ext">.png</span>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <div class="info-pill" id="dim-badge" title="Image Resolution">
+          <span class="pill-icon">📐</span>
+          <span id="dim-text">0 × 0 px</span>
+        </div>
+        <div class="info-pill" id="size-badge" title="Estimated Size">
+          <span class="pill-icon">💾</span>
+          <span id="size-text">-- KB</span>
+        </div>
+        
+        <div class="zoom-controls">
+          <button id="btn-zoom-out" class="icon-btn" title="Zoom Out (Ctrl -)">−</button>
+          <button id="btn-zoom-reset" class="text-btn" title="Reset Zoom to 100%">100%</button>
+          <button id="btn-zoom-in" class="icon-btn" title="Zoom In (Ctrl +)">+</button>
+          <button id="btn-zoom-fit" class="icon-btn" title="Fit to Screen">⛶</button>
+        </div>
+
+        <div class="history-controls">
+          <button id="btn-undo" class="icon-btn" title="Undo (Ctrl+Z)" disabled>↩</button>
+          <button id="btn-redo" class="icon-btn" title="Redo (Ctrl+Y)" disabled>↪</button>
+          <button id="btn-clear" class="icon-btn" title="Clear all annotations">🗑</button>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button id="btn-copy" class="action-btn copy-btn" title="Copy screenshot to Clipboard">
+          <span class="btn-icon">📋</span>
+          <span>Copy</span>
+        </button>
+
+        <div class="download-dropdown-wrap">
+          <button id="btn-download" class="action-btn download-btn">
+            <span class="btn-icon">⬇</span>
+            <span>Download</span>
+            <span class="caret">▾</span>
+          </button>
+          <div id="download-menu" class="dropdown-menu">
+            <button class="dropdown-item" data-format="png">
+              <b>PNG</b> <span class="format-hint">Lossless High Quality</span>
+            </button>
+            <button class="dropdown-item" data-format="jpeg">
+              <b>JPG / JPEG</b> <span class="format-hint">Adjustable Quality</span>
+            </button>
+            <button class="dropdown-item" data-format="webp">
+              <b>WebP</b> <span class="format-hint">Modern Compressed</span>
+            </button>
+          </div>
+        </div>
+
+        <button id="btn-pdf-modal" class="action-btn pdf-btn" title="Export to PDF document">
+          <span class="btn-icon">📑</span>
+          <span>PDF</span>
+        </button>
+
+        <button id="btn-drive-modal" class="action-btn drive-btn" title="Save to Google Drive">
+          <span class="btn-icon">☁</span>
+          <span>Drive</span>
+        </button>
+
+        <button id="btn-close" class="action-btn close-btn" title="Close Editor">✕</button>
+      </div>
+    </header>
+
+    <div class="studio-workspace">
+      <aside class="toolbox">
+        <div class="tool-section">
+          <button class="tool-btn active" data-tool="select" title="Select / Pan Canvas">
+            <span class="tool-icon">🖐</span>
+            <span class="tool-tip">Pan</span>
+          </button>
+          <button class="tool-btn" data-tool="crop" title="Crop Screenshot">
+            <span class="tool-icon">✂</span>
+            <span class="tool-tip">Crop</span>
+          </button>
+        </div>
+
+        <div class="tool-divider"></div>
+
+        <div class="tool-section">
+          <button class="tool-btn" data-tool="pen" title="Freehand Pen">
+            <span class="tool-icon">✏</span>
+            <span class="tool-tip">Pen</span>
+          </button>
+          <button class="tool-btn" data-tool="highlighter" title="Highlighter (Semi-transparent)">
+            <span class="tool-icon">🖍</span>
+            <span class="tool-tip">Highlight</span>
+          </button>
+          <button class="tool-btn" data-tool="arrow" title="Arrow Line">
+            <span class="tool-icon">➔</span>
+            <span class="tool-tip">Arrow</span>
+          </button>
+          <button class="tool-btn" data-tool="rect" title="Rectangle Box">
+            <span class="tool-icon">▭</span>
+            <span class="tool-tip">Rectangle</span>
+          </button>
+          <button class="tool-btn" data-tool="circle" title="Circle / Ellipse">
+            <span class="tool-icon">◯</span>
+            <span class="tool-tip">Circle</span>
+          </button>
+          <button class="tool-btn" data-tool="line" title="Straight Line">
+            <span class="tool-icon">╱</span>
+            <span class="tool-tip">Line</span>
+          </button>
+          <button class="tool-btn" data-tool="text" title="Add Text">
+            <span class="tool-icon">T</span>
+            <span class="tool-tip">Text</span>
+          </button>
+        </div>
+
+        <div class="tool-divider"></div>
+
+        <div class="tool-section">
+          <button class="tool-btn" data-tool="blur" title="Blur Sensitive Information">
+            <span class="tool-icon">💧</span>
+            <span class="tool-tip">Blur</span>
+          </button>
+          <button class="tool-btn" data-tool="pixelate" title="Pixelate Sensitive Area">
+            <span class="tool-icon">▦</span>
+            <span class="tool-tip">Pixelate</span>
+          </button>
+        </div>
+
+        <div class="tool-divider"></div>
+
+        <div class="stroke-selector">
+          <div class="stroke-preview" id="stroke-preview-circle"></div>
+          <input type="range" id="stroke-width" min="2" max="32" value="4" title="Stroke Thickness">
+        </div>
+
+        <div class="color-palette">
+          <button class="color-dot active" data-color="#0284c7" style="background: #0284c7;"></button>
+          <button class="color-dot" data-color="#ef4444" style="background: #ef4444;"></button>
+          <button class="color-dot" data-color="#10b981" style="background: #10b981;"></button>
+          <button class="color-dot" data-color="#f59e0b" style="background: #f59e0b;"></button>
+          <button class="color-dot" data-color="#8b5cf6" style="background: #8b5cf6;"></button>
+          <button class="color-dot" data-color="#ffffff" style="background: #ffffff;"></button>
+          <button class="color-dot" data-color="#0f172a" style="background: #0f172a; border: 1px solid #475569;"></button>
+          <label class="color-picker-label" title="Custom Color">
+            <input type="color" id="custom-color-picker" value="#0284c7">
+            <span class="color-picker-btn">🎨</span>
+          </label>
+        </div>
+      </aside>
+
+      <main class="canvas-viewport" id="viewport">
+        <div class="canvas-stage" id="stage">
+          <canvas id="base-canvas"></canvas>
+          <canvas id="annotation-canvas"></canvas>
+
+          <div id="crop-overlay" class="crop-overlay-box" style="display: none;">
+            <div class="crop-bar">
+              <span id="crop-dim-badge">0 × 0 px</span>
+              <div class="crop-buttons">
+                <button id="btn-apply-crop" class="crop-btn apply">✓ Apply</button>
+                <button id="btn-cancel-crop" class="crop-btn cancel">✕ Cancel</button>
+              </div>
+            </div>
+            <div class="crop-handle nw"></div>
+            <div class="crop-handle ne"></div>
+            <div class="crop-handle sw"></div>
+            <div class="crop-handle se"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <div id="pdf-modal" class="modal-backdrop" style="display: none;">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>📑 Export as PDF Document</h3>
+          <button class="modal-close" id="btn-close-pdf-modal">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Page Format</label>
+            <div class="radio-cards">
+              <label class="radio-card">
+                <input type="radio" name="pdf-format" value="portrait" checked>
+                <span class="radio-card-content">
+                  <b>A4 Portrait</b>
+                  <small>Standard 210 × 297 mm</small>
+                </span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="pdf-format" value="landscape">
+                <span class="radio-card-content">
+                  <b>A4 Landscape</b>
+                  <small>Horizontal 297 × 210 mm</small>
+                </span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="pdf-format" value="original">
+                <span class="radio-card-content">
+                  <b>Original Size</b>
+                  <small>Match capture resolution</small>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="pdf-multipage" checked>
+              <span><b>Auto Multi-Page Split</b> (recommended for tall full page screenshots without squishing text)</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label>Quality & Resolution</label>
+            <select id="pdf-quality-select" class="form-select">
+              <option value="100">Maximum High Quality (100%)</option>
+              <option value="90">High Quality (90%)</option>
+              <option value="80">Balanced (80%)</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" id="btn-cancel-pdf">Cancel</button>
+          <button class="btn-primary" id="btn-generate-pdf">Generate & Download PDF</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="drive-modal" class="modal-backdrop" style="display: none;">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>☁ Save to Google Drive</h3>
+          <button class="modal-close" id="btn-close-drive-modal">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="drive-status-card" id="drive-status-banner">
+            <div class="drive-icon">📁</div>
+            <div>
+              <div class="drive-folder-title">Folder: <b>Said Screenshot Pro</b></div>
+              <div class="drive-folder-sub">Screenshots are stored in your Google Drive folder.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Destination & Actions</label>
+            <div class="radio-options">
+              <label class="radio-line">
+                <input type="radio" name="save-dest" value="drive" checked>
+                <span>Save to Google Drive</span>
+              </label>
+              <label class="radio-line">
+                <input type="radio" name="save-dest" value="computer">
+                <span>Save to Computer (Download)</span>
+              </label>
+              <label class="radio-line">
+                <input type="radio" name="save-dest" value="both">
+                <span>Save Both (Drive & Computer)</span>
+              </label>
+            </div>
+          </div>
+
+          <div id="drive-upload-progress" style="display: none; margin-top: 15px;">
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" id="drive-progress-fill"></div>
+            </div>
+            <div id="drive-progress-text" style="font-size: 12px; color: #94a3b8; margin-top: 6px; text-align: center;">Uploading...</div>
+          </div>
+
+          <div id="drive-success-alert" style="display: none; margin-top: 15px;" class="success-box">
+            <span>✓ Screenshot saved to Google Drive!</span>
+            <a id="drive-open-link" href="#" target="_blank" class="drive-view-btn">Open in Google Drive ↗</a>
+          </div>
+
+          <div id="drive-error-alert" style="display: none; margin-top: 15px;" class="error-box"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" id="btn-cancel-drive">Close</button>
+          <button class="btn-primary" id="btn-confirm-drive">Upload to Google Drive</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="jpg-modal" class="modal-backdrop" style="display: none;">
+      <div class="modal-card modal-sm">
+        <div class="modal-header">
+          <h3>JPEG Quality Setting</h3>
+          <button class="modal-close" id="btn-close-jpg-modal">✕</button>
+        </div>
+        <div class="modal-body">
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+            <span>Compression Quality:</span>
+            <b id="jpg-quality-val" style="color: #38bdf8;">100%</b>
+          </div>
+          <input type="range" id="jpg-quality-slider" min="50" max="100" value="100" step="5" style="width: 100%;">
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: #94a3b8; margin-top: 6px;">
+            <span>50% (Small)</span>
+            <span>80%</span>
+            <span>100% (Lossless)</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-primary" id="btn-confirm-jpg-download" style="width: 100%;">Download JPG</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="editor.js"></script>
+</body>
+</html>

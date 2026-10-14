@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Said Screenshot Pro</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body class="theme-dark">
+  <div class="popup-wrapper">
+    <header class="popup-header">
+      <div class="header-branding">
+        <div class="brand-logo-glow">
+          <img src="icons/icon32.png" alt="Logo" class="brand-logo">
+        </div>
+        <div>
+          <h1 class="brand-name">SAID SCREENSHOT PRO</h1>
+          <p class="brand-tagline">Capture Anything. Save Everything.</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="btn-open-options" class="ghost-icon-btn" title="Settings ⚙">⚙</button>
+      </div>
+    </header>
+
+    <section class="mode-selector-wrap">
+      <div class="mode-pills" id="mode-pills">
+        <button class="mode-pill active" data-mode="visible">
+          <span class="mode-icon">📸</span>
+          <span>Visible</span>
+        </button>
+        <button class="mode-pill" data-mode="area">
+          <span class="mode-icon">✂</span>
+          <span>Area</span>
+        </button>
+        <button class="mode-pill" data-mode="fullpage">
+          <span class="mode-icon">🌐</span>
+          <span>Full Page</span>
+        </button>
+        <button class="mode-pill" data-mode="custom">
+          <span class="mode-icon">📜</span>
+          <span>Custom</span>
+        </button>
+      </div>
+    </section>
+
+    <div class="timer-bar">
+      <span class="timer-label">⏱ Capture Delay:</span>
+      <div class="timer-options">
+        <button class="timer-btn active" data-delay="0">Instant</button>
+        <button class="timer-btn" data-delay="3">3s</button>
+        <button class="timer-btn" data-delay="5">5s</button>
+      </div>
+    </div>
+
+    <section class="main-actions-grid">
+      <button id="btn-capture-visible" class="action-card primary-card">
+        <div class="action-card-left">
+          <div class="action-icon-circle blue-glow">📸</div>
+          <div class="action-text">
+            <span class="action-title">Visible Area</span>
+            <span class="action-desc">Current screen viewport</span>
+          </div>
+        </div>
+        <kbd class="shortcut-badge">Ctrl+Shift+S</kbd>
+      </button>
+
+      <button id="btn-capture-area" class="action-card">
+        <div class="action-card-left">
+          <div class="action-icon-circle cyan-glow">✂</div>
+          <div class="action-text">
+            <span class="action-title">Select Area</span>
+            <span class="action-desc">Drag mouse to select snippet</span>
+          </div>
+        </div>
+        <kbd class="shortcut-badge">Ctrl+Shift+A</kbd>
+      </button>
+
+      <button id="btn-capture-fullpage" class="action-card">
+        <div class="action-card-left">
+          <div class="action-icon-circle purple-glow">🌐</div>
+          <div class="action-text">
+            <span class="action-title">Full Page</span>
+            <span class="action-desc">Auto-scroll & stitch entire page</span>
+          </div>
+        </div>
+        <kbd class="shortcut-badge">Ctrl+Shift+F</kbd>
+      </button>
+
+      <div class="secondary-actions-row">
+        <button id="btn-capture-custom" class="secondary-action-btn">
+          <span>📜</span>
+          <span>Custom Scroll</span>
+        </button>
+        <button id="btn-capture-pdf" class="secondary-action-btn">
+          <span>📑</span>
+          <span>PDF Capture</span>
+        </button>
+      </div>
+    </section>
+
+    <div id="countdown-hud" class="countdown-hud" style="display: none;">
+      <div class="countdown-circle">
+        <span id="countdown-num">3</span>
+      </div>
+      <p class="countdown-caption">Capturing screenshot...</p>
+    </div>
+
+    <section class="history-section">
+      <div class="history-header">
+        <div class="history-title-wrap">
+          <span class="history-title">Recent Screenshots</span>
+          <span id="history-count" class="history-counter">0</span>
+        </div>
+        <button id="btn-clear-history" class="clear-history-btn" title="Clear history">Clear</button>
+      </div>
+
+      <div id="history-list" class="history-list">
+        <div class="empty-history" id="empty-history-placeholder">
+          <span>📷</span>
+          <p>No recent screenshots yet. Capture your first one above!</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="popup-footer">
+      <div class="footer-status">
+        <span class="status-dot"></span>
+        <span>Said Screenshot Pro • Ready</span>
+      </div>
+      <a href="options.html" target="_blank" class="footer-help-link">Docs & Help ↗</a>
+    </footer>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

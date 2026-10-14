@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Said Screenshot Pro - Settings & Configuration</title>
+  <link rel="stylesheet" href="options.css">
+  <link rel="icon" type="image/png" href="icons/icon32.png">
+</head>
+<body class="theme-dark">
+  <div class="settings-container">
+    <aside class="settings-sidebar">
+      <div class="sidebar-header">
+        <img src="icons/icon32.png" alt="Logo" class="sidebar-logo">
+        <div>
+          <h2>SAID SCREENSHOT PRO</h2>
+          <p>Version 1.0.0</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-tab="general">
+          <span class="nav-icon">⚙</span>
+          <span>General Settings</span>
+        </button>
+        <button class="nav-item" data-tab="engine">
+          <span class="nav-icon">🚀</span>
+          <span>Capture Engine</span>
+        </button>
+        <button class="nav-item" data-tab="naming">
+          <span class="nav-icon">🏷</span>
+          <span>File Naming</span>
+        </button>
+        <button class="nav-item" data-tab="drive">
+          <span class="nav-icon">☁</span>
+          <span>Google Drive</span>
+        </button>
+        <button class="nav-item" data-tab="shortcuts">
+          <span class="nav-icon">⌨</span>
+          <span>Shortcuts</span>
+        </button>
+        <button class="nav-item" data-tab="guide">
+          <span class="nav-icon">📖</span>
+          <span>Installation Guide</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="https://github.com" target="_blank" class="footer-link">Documentation</a>
+        <span>•</span>
+        <span class="created-by">By Said</span>
+      </div>
+    </aside>
+
+    <main class="settings-content">
+      <section id="tab-general" class="tab-pane active">
+        <div class="pane-header">
+          <h2>General Preferences</h2>
+          <p>Customize default screenshot formats, behavior and download actions.</p>
+        </div>
+
+        <div class="card">
+          <div class="form-row">
+            <div>
+              <label class="form-label">Default Format</label>
+              <p class="form-help">Initial format selected when downloading</p>
+            </div>
+            <select id="setting-default-format" class="form-select">
+              <option value="png">PNG (Lossless High Quality)</option>
+              <option value="jpeg">JPG / JPEG (Compressed)</option>
+              <option value="webp">WebP (Modern Web Format)</option>
+              <option value="pdf">PDF Document</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label class="form-label">Default JPEG Quality</label>
+              <p class="form-help">Quality level when saving in JPEG mode</p>
+            </div>
+            <div class="slider-val-wrap">
+              <input type="range" id="setting-quality" min="50" max="100" value="100" step="5">
+              <span id="quality-val-badge" class="badge">100%</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label class="form-label">Auto Download on Capture</label>
+              <p class="form-help">Immediately save screenshot file without opening editor</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="setting-auto-download">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label class="form-label">Auto Save to Google Drive</label>
+              <p class="form-help">Automatically backup every screenshot to Google Drive</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="setting-auto-drive">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-engine" class="tab-pane">
+        <div class="pane-header">
+          <h2>Capture Engine Tuning</h2>
+          <p>Configure device pixel ratio, scrolling delays, and fixed header handling.</p>
+        </div>
+
+        <div class="card">
+          <div class="form-row">
+            <div>
+              <label class="form-label">High DPI / Retina Resolution (devicePixelRatio)</label>
+              <p class="form-help">Preserves crystal-clear text on 2x/3x Retina & high-DPI monitors</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="setting-high-dpr" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label class="form-label">Hide Sticky / Fixed Headers During Full Page</label>
+              <p class="form-help">Prevents floating navigation menus from repeating on every scrolled tile</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="setting-hide-sticky" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label class="form-label">Full Page Scroll Delay (ms)</label>
+              <p class="form-help">Wait time before capturing each frame to allow lazy images to load</p>
+            </div>
+            <select id="setting-scroll-delay" class="form-select">
+              <option value="250">250 ms (Fast)</option>
+              <option value="400" selected>400 ms (Recommended)</option>
+              <option value="600">600 ms (For heavy/slow sites)</option>
+              <option value="900">900 ms (Maximum compatibility)</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-naming" class="tab-pane">
+        <div class="pane-header">
+          <h2>File Naming System</h2>
+          <p>Automatically generate structured, readable names for all captured images.</p>
+        </div>
+
+        <div class="card">
+          <div class="form-row">
+            <div>
+              <label class="form-label">Naming Style</label>
+              <p class="form-help">Select the template pattern for downloaded screenshots</p>
+            </div>
+            <select id="setting-naming-style" class="form-select">
+              <option value="timestamp">Timestamp Prefix (SaidScreenshot_YYYY-MM-DD_HH-mm-ss)</option>
+              <option value="title_date">Webpage Title + Date (Google_Homepage_YYYY-MM-DD)</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label class="form-label">Custom Prefix</label>
+              <p class="form-help">Custom prefix text for file names</p>
+            </div>
+            <input type="text" id="setting-name-prefix" class="form-input" value="SaidScreenshot_">
+          </div>
+
+          <div class="preview-box">
+            <span class="preview-label">Live Filename Preview:</span>
+            <code id="naming-preview">SaidScreenshot_2026-10-13_17-30-00.png</code>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-drive" class="tab-pane">
+        <div class="pane-header">
+          <h2>Google Drive Integration</h2>
+          <p>Sync and backup your screenshots straight to your personal or work Google Drive account.</p>
+        </div>
+
+        <div class="card">
+          <div class="drive-account-card">
+            <div class="drive-acc-icon">☁</div>
+            <div class="drive-acc-info">
+              <h3 id="drive-conn-status">Google Drive: Disconnected</h3>
+              <p id="drive-conn-sub">Connect to automatically save screenshots to Google Drive.</p>
+            </div>
+            <button id="btn-toggle-drive-auth" class="btn-primary">Connect Account</button>
+          </div>
+
+          <div class="form-row" style="margin-top: 16px;">
+            <div>
+              <label class="form-label">Drive Backup Folder Name</label>
+              <p class="form-help">Said Screenshot Pro will automatically create this folder in your Drive</p>
+            </div>
+            <input type="text" id="setting-drive-folder" class="form-input" value="Said Screenshot Pro">
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label class="form-label">Custom OAuth Client ID (Optional)</label>
+              <p class="form-help">Enter your Google Cloud Console OAuth 2.0 Web/Extension Client ID</p>
+            </div>
+            <input type="text" id="setting-google-client-id" class="form-input" placeholder="e.g. 123456789-abcdef.apps.googleusercontent.com">
+          </div>
+        </div>
+
+        <div class="card guide-card">
+          <div class="guide-title">
+            <span>🔑</span>
+            <h3>Step-by-Step: How to configure Google Drive OAuth (Bengali & English)</h3>
+          </div>
+          <div class="guide-content">
+            <div class="guide-lang">
+              <h4>বাংলা নির্দেশিকা (Bangla):</h4>
+              <ol class="step-list">
+                <li><b>Google Cloud Console</b>-এ যান (<a href="https://console.cloud.google.com" target="_blank">console.cloud.google.com</a>) এবং একটি New Project তৈরি করুন।</li>
+                <li><b>APIs & Services &gt; Library</b>-তে গিয়ে <b>Google Drive API</b> Enable করুন।</li>
+                <li><b>OAuth consent screen</b>-এ গিয়ে User Type: <i>External</i> নির্বাচন করুন এবং আপনার App Name (Said Screenshot Pro) ও Email দিন।</li>
+                <li><b>Credentials &gt; Create Credentials &gt; OAuth client ID</b>-তে ক্লিক করুন:
+                  <ul>
+                    <li>Application type: <b>Chrome extension</b> (অথবা Web application)</li>
+                    <li>Item ID: Chrome extensions পেজে (<kbd>chrome://extensions</kbd>) আপনার Said Screenshot Pro-এর যে ID দেখাবে সেটি দিন।</li>
+                  </ul>
+                </li>
+                <li>তৈরি হওয়া <b>Client ID</b> কপি করে উপরের ইনপুট বক্সে পেস্ট করে <b>Save</b> চাপুন!</li>
+              </ol>
+            </div>
+            <div class="guide-lang" style="margin-top: 16px;">
+              <h4>English Instructions:</h4>
+              <ol class="step-list">
+                <li>Go to Google Cloud Console and enable the <b>Google Drive API</b>.</li>
+                <li>Configure the OAuth consent screen with <b>https://www.googleapis.com/auth/drive.file</b> scope.</li>
+                <li>Create an OAuth Client ID for Chrome App / Extension with your unpacked extension ID.</li>
+                <li>Paste the Client ID into the box above and click Save.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-shortcuts" class="tab-pane">
+        <div class="pane-header">
+          <h2>Keyboard Shortcuts</h2>
+          <p>Instant shortcuts to capture with lightning speed from any web page.</p>
+        </div>
+
+        <div class="card">
+          <div class="shortcut-row">
+            <div>
+              <div class="shortcut-name">Capture Visible Area</div>
+              <div class="shortcut-desc">Screenshots the currently visible viewport</div>
+            </div>
+            <kbd class="shortcut-badge large">Ctrl + Shift + S</kbd>
+          </div>
+
+          <div class="shortcut-row">
+            <div>
+              <div class="shortcut-name">Select Area Snippet</div>
+              <div class="shortcut-desc">Activates interactive drag-to-crop selection overlay</div>
+            </div>
+            <kbd class="shortcut-badge large">Ctrl + Shift + A</kbd>
+          </div>
+
+          <div class="shortcut-row">
+            <div>
+              <div class="shortcut-name">Full Page Scrolling Capture</div>
+              <div class="shortcut-desc">Auto-scrolls and stitches full page into a single image</div>
+            </div>
+            <kbd class="shortcut-badge large">Ctrl + Shift + F</kbd>
+          </div>
+
+          <div class="shortcut-row">
+            <div>
+              <div class="shortcut-name">Open Said Screenshot Pro Popup</div>
+              <div class="shortcut-desc">Brings up the popup window from anywhere</div>
+            </div>
+            <kbd class="shortcut-badge large">Ctrl + Shift + E</kbd>
+          </div>
+
+          <div class="shortcut-footer">
+            <p>To customize or change shortcut keys, open Chrome Shortcuts settings: <kbd>chrome://extensions/shortcuts</kbd></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-guide" class="tab-pane">
+        <div class="pane-header">
+          <h2>Chrome Installation & Testing Guide</h2>
+          <p>Complete beginner-friendly instructions to load and test Said Screenshot Pro.</p>
+        </div>
+
+        <div class="card">
+          <h3>Chrome-এ Extension ইনস্টল করার নিয়ম (Step-by-Step):</h3>
+          <ol class="step-list large-steps">
+            <li><b>Google Chrome</b> ব্রাউজার ওপেন করুন।</li>
+            <li>এড্রেস বারে টাইপ করুন: <kbd>chrome://extensions</kbd> এবং <b>Enter</b> চাপুন।</li>
+            <li>উপরে ডান কোনায় থাকা <b>Developer mode</b> টগল সুইচটি <b>ON</b> করুন।</li>
+            <li>উপরে বাম পাশে একটি নতুন বাটন দেখতে পাবেন: <b>Load unpacked</b>।</li>
+            <li><b>Load unpacked</b> বাটনে ক্লিক করে <code>said-screenshot-pro</code> ফোল্ডারটি সিলেক্ট করুন।</li>
+            <li>সাথে সাথেই Said Screenshot Pro ব্রাউজারে ইনস্টল হয়ে যাবে!</li>
+            <li>Chrome-এর উপরের ডান পাশে থাকা Puzzle আইকনে (Extensions) ক্লিক করে <b>Said Screenshot Pro</b>-এর পাশে থাকা <b>Pin</b> আইকনে ক্লিক করুন যাতে এটি সবসময় সামনে থাকে।</li>
+          </ol>
+        </div>
+      </section>
+
+      <div id="save-toast" class="save-toast">✓ Settings saved successfully!</div>
+    </main>
+  </div>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>
